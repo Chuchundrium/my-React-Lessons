@@ -1,0 +1,12 @@
+.dialogsItems, .messages{
+    padding: 10px;
+}
+
+.dialog a {
+    color: #747e80;
+    text-decoration: none;
+}
+.dialog.active {
+    color: #f05945;
+    font-style: italic;
+}
