@@ -1,19 +1,18 @@
 import React from 'react';
 import './App.css';
 
-import { Route, BrowserRouter } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 
 import Header from './components/Header/Header';
 import Navbar from './components/Navbar/Navbar';
-import Profile from './components/Profile';
+import Profile from './components/Profile/Profile';
 import Dialogs from './components/Dialogs/Dialogs';
 import News from './components/News/News';
 import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
 
 const App = (props) => {
-  return (
-    <BrowserRouter>
+  return (  
       <div className='app-wrapper'>
         <Header />
         <Navbar />
@@ -21,11 +20,11 @@ const App = (props) => {
           <Route
             path='/profile'
             render={() => <Profile
-              posts={props.state.profilePage.posts} />} />
+              state={props.state.profilePage} />} />
           <Route
             path='/dialogs'
             render={() => <Dialogs 
-            dalogs={props.state.messagesPage} />} />
+            state={props.state.messagesPage} />} />
           <Route
             path='/news'
             render={() => <News />} />
@@ -37,7 +36,6 @@ const App = (props) => {
             render={() => <Settings />} />
         </div>
       </div>
-    </BrowserRouter>
   );
 }
 
