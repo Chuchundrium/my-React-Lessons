@@ -1,4 +1,5 @@
 const store = {
+    //private variables
     _state: {
         profilePage: {
             posts: [
@@ -20,39 +21,36 @@ const store = {
         },
         sidebar: {}
     },
-
-    getState() {
-        return this._state; 
-    },
-
     _callSubscriber() {
         console.log('bububu');
     },
-
-    addPost() {
-        const allPosts = this._state.profilePage.posts;
-        const l = allPosts.length - 1;
-        const newId = allPosts[l].id + 1;
-        let newPost = {
-            id: newId,
-            message: this._state.profilePage.newPostText,
-            likes: 0,
-            dislikes: 0
-        }
-        allPosts.push(newPost);
-        this._state.profilePage.newPostText = '';
-        this._callSubscriber(this._state);
+    //methods can not modify state
+    getState() {
+        return this._state; 
     },
-
-    updateNewPostText(newText) {
-        this._state.profilePage.newPostText = newText;
-        this._callSubscriber(this._state);
-    },
-
     subscribe(observer) {
         this._callSubscriber = observer;
+    },
+    //method for state modifying
+    dispatch(action) {
+        if (action.type === 'ADD-POST') {
+            const allPosts = this._state.profilePage.posts;
+            const l = allPosts.length - 1;
+            const newId = allPosts[l].id + 1;
+            let newPost = {
+                id: newId,
+                message: this._state.profilePage.newPostText,
+                likes: 0,
+                dislikes: 0
+            }
+            allPosts.push(newPost);
+            this._state.profilePage.newPostText = '';
+            this._callSubscriber(this._state);
+        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+            this._state.profilePage.newPostText = action.newText;
+            this._callSubscriber(this._state);
+        }
     }
-
 }
 
 window.store = store;
