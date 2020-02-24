@@ -1,3 +1,6 @@
+const ADD_POST = 'ADD-POST';
+const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+
 const store = {
     //private variables
     _state: {
@@ -26,14 +29,14 @@ const store = {
     },
     //methods can not modify state
     getState() {
-        return this._state; 
+        return this._state;
     },
     subscribe(observer) {
         this._callSubscriber = observer;
     },
     //method for state modifying
     dispatch(action) {
-        if (action.type === 'ADD-POST') {
+        if (action.type === ADD_POST) {
             const allPosts = this._state.profilePage.posts;
             const l = allPosts.length - 1;
             const newId = allPosts[l].id + 1;
@@ -46,12 +49,22 @@ const store = {
             allPosts.push(newPost);
             this._state.profilePage.newPostText = '';
             this._callSubscriber(this._state);
-        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+        } else if (action.type === UPDATE_NEW_POST_TEXT) {
             this._state.profilePage.newPostText = action.newText;
             this._callSubscriber(this._state);
         }
     }
 }
+
+
+export const addPostActionCreator = () => ({
+        type: ADD_POST
+})
+
+export const updateNewPostTextActionCreator = (text) => ({
+        type: UPDATE_NEW_POST_TEXT,
+        newText: text
+})
 
 window.store = store;
 
