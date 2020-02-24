@@ -5,10 +5,10 @@ import Message from './Message/message';
 
 const Dialogs = (props) => {
 
-    let dialogsElements = props.state.dialogs
+    let dialogsElements = props.messagesPage.dialogs
         .map(d => <DialogItem name={d.name} id={d.id} />
         );
-    let messageElements = props.state.messages
+    let messageElements = props.messagesPage.messages
         .map(m => <Message content={m.message} />
         );
     let newPostElement = React.createRef();
