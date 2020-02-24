@@ -1,5 +1,6 @@
-import {rendererEntireTree} from './../render';
-
+let rendererEntireTree = () => {
+    console.log('bububu');
+}
 let state = {
     profilePage: {
         posts: [
@@ -21,7 +22,7 @@ let state = {
     },
     sidebar: {}
 };
-export let addPost = () => {
+export const addPost = () => {
     let allPosts = state.profilePage.posts;
     let l = allPosts.length - 1;
     let newId = allPosts[l].id + 1;
@@ -35,9 +36,13 @@ export let addPost = () => {
     state.profilePage.newPostText = '';
     rendererEntireTree(state);
 };
-export let updateNewPostText = (newText) => {
+export const updateNewPostText = (newText) => {
     state.profilePage.newPostText = newText;
     rendererEntireTree(state);
+}
+
+export const subscribe = (observer) => {
+    rendererEntireTree = observer; //one of the patterns
 }
 
 export default state;
