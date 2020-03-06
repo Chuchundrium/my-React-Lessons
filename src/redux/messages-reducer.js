@@ -27,7 +27,7 @@ const messagesReducer = (state = initialState, action) => {
                 newMsgBody: '',
                 messages: [
                     ...state.messages, 
-                    { id: state.messages.length + 1, message: state.newMsgBody }
+                    { id: (state.messages.length + 1), message: state.newMsgBody }
                 ]
             };
 
