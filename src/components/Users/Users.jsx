@@ -2,7 +2,6 @@ import React from 'react';
 import s from './Users.module.css';
 import userPhoto from '../../assets/images/coo.jpg';
 import { NavLink } from 'react-router-dom';
-import { usersAPI } from '../../api/api';
 
 const Users = (props) => {
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
@@ -36,27 +35,14 @@ const Users = (props) => {
                     {u.followed ?
                         <button disabled={props.isFollowingInProgress.some(id => id === u.id)}
                             onClick={() => {
-                                props.toggleIsFolowwingInProgress(true, u.id);
-                                usersAPI.unfollowUser(u.id)
-                                    .then(data => {
-                                        if (data.resultCode == 0) {
-                                            props.unfollow(u.id)
-                                        };
-                                        props.toggleIsFolowwingInProgress(false, u.id);
-                                    })
-
-                            }}>Unfollow</button> :
+                                props.unfollow(u.id)
+                            }}
+                        >Unfollow</button> :
                         <button disabled={props.isFollowingInProgress.some(id => id === u.id)}
                             onClick={() => {
-                                props.toggleIsFolowwingInProgress(true, u.id);
-                                usersAPI.followUser(u.id)
-                                    .then(data => {
-                                        if (data.resultCode == 0) {
-                                            props.follow(u.id)
-                                        }
-                                        props.toggleIsFolowwingInProgress(false, u.id);
-                                    })
-                            }}>Follow</button>}
+                                props.follow(u.id);
+                            }}
+                        >Follow</button>}
                 </div>
                 <div>{u.name}</div>
                 <div>{u.status}</div>
