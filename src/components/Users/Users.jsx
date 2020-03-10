@@ -17,7 +17,7 @@ const Users = (props) => {
                     return (
                         <span key={p}
                             id={s.pageNumber}
-                            className={(p == props.currentPage) ? s.selectedPage : undefined}
+                            className={(p === props.currentPage) ? s.selectedPage : undefined}
                             onClick={(e) => { props.onPageChanged(p) }}
                         >{p}</span>
                     )
@@ -28,17 +28,19 @@ const Users = (props) => {
                 <div>
                     <NavLink to={'/profile/' + u.id}>
                         <img className={s.usersPhoto}
-                            src={u.photos.small != null ? u.photos.small : userPhoto} />
+                            src={u.photos.small != null ? u.photos.small : userPhoto} alt='userPhoto'/>
                     </NavLink>
                 </div>
                 <div>
                     {u.followed ?
-                        <button disabled={props.isFollowingInProgress.some(id => id === u.id)}
+                        <button 
+                            disabled={props.isFollowingInProgress.some(id => id === u.id)}
                             onClick={() => {
                                 props.unfollow(u.id)
                             }}
                         >Unfollow</button> :
-                        <button disabled={props.isFollowingInProgress.some(id => id === u.id)}
+                        <button 
+                            disabled={props.isFollowingInProgress.some(id => id === u.id)}
                             onClick={() => {
                                 props.follow(u.id);
                             }}

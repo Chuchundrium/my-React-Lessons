@@ -21,8 +21,14 @@ export const usersAPI = {
         return axiosInstance.post(`follow/${id}`)
             .then(response => response.data);
     },
-    getMeAuth() {
+    getProfile(id) {
+        return axios.get(`profile/${id}`);
+    }
+}
+
+export const authAPI = {
+    getMe() {
         return axiosInstance.get(`auth/me`)
             .then(response => response.data)
-    }
+    },
 }

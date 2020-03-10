@@ -63,9 +63,9 @@ const usersReducer = (state = initialState, action) => {
         case TOGGLE_IS_FOLLOWING_IN_PROGRESS:
             return {
                 ...state,
-                isFollowingInProgress: action.isFetching ?
+                isFollowingInProgress: action.isFollowingInProgress ?
                     [...state.isFollowingInProgress, action.userId] :
-                    state.isFollowingInProgress.filter(id => id != action.userId)
+                    state.isFollowingInProgress.filter(id => id !== action.userId)
             }
         default:
             return state;
@@ -115,7 +115,7 @@ export const follow = (userId) => {
         dispatch(toggleIsFollowingInProgress(true, userId));
         usersAPI.followUser(userId)
             .then(data => {
-                if (data.resultCode == 0) {
+                if (data.resultCode === 0) {
                     dispatch(followAC(userId))
                 }
                 dispatch(toggleIsFollowingInProgress(false, userId));
@@ -128,7 +128,7 @@ export const unfollow = (userId) => {
         dispatch(toggleIsFollowingInProgress(true, userId));
         usersAPI.unfollowUser(userId)
             .then(data => {
-                if (data.resultCode == 0) {
+                if (data.resultCode === 0) {
                     dispatch(unfollowAC(userId))
                 };
                 dispatch(toggleIsFollowingInProgress(false, userId));
