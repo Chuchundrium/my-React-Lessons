@@ -21,11 +21,21 @@ export const usersAPI = {
         return axiosInstance.post(`follow/${id}`)
             .then(response => response.data);
     },
+    
+};
+
+export const profileAPI = {
     getProfile(id) {
         return axiosInstance.get(`profile/${id}`)
         .then(response => response);
-    }
-}
+    },
+    getUserStatus(id) {
+        return axiosInstance.get(`profile/status/${id}`)
+    },
+    updateStatus(newStatus) {
+        return axiosInstance.put(`profile/status`, {status: newStatus})
+    },
+};
 
 export const authAPI = {
     getMe() {

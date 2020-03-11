@@ -8,20 +8,20 @@ const ProfileInfo = (props) => {
         return <Reloader />
     } else return (
         <div>
-            {/* <div>
-                <img src='https://image.freepik.com/free-vector/_3470-14.jpg' alt='photoOne'/>
-            </div> */}
             <div className={s.descriptionBlock}>
-                <img src={props.profile.photos.small} alt='photoSmall'/>
-                <ProfileStatus status={'test status'}/>
+                <img src={props.profile.photos.small} alt='photoSmall' />
+                <ProfileStatus
+                    status={props.status}
+                    updateStatus={props.updateStatus}
+                />
 
                 <div>
-                    <span>{props.profile.fullName}</span> <br/>
+                    <span>{props.profile.fullName}</span> <br />
                     <span>{props.profile.aboutMe}</span>
                 </div>
             </div>
         </div>
-            )
-        }
-        
+    )
+}
+
 export default ProfileInfo;
