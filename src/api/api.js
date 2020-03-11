@@ -22,7 +22,7 @@ export const usersAPI = {
             .then(response => response.data);
     },
     getProfile(id) {
-        return axios.get(`profile/${id}`)
+        return axiosInstance.get(`profile/${id}`)
         .then(response => response);
     }
 }
