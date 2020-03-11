@@ -24,28 +24,33 @@ const Users = (props) => {
                 })
                 }
             </div>
-            {props.users.map(u => <div key={u.id}>
+
+            {props.users.map(u => 
+            <div key={u.id}>
+
                 <div>
-                    <NavLink to={'/profile/' + u.id}>
+                    <NavLink to={`/profile/` + u.id}>
                         <img className={s.usersPhoto}
-                            src={u.photos.small != null ? u.photos.small : userPhoto} alt='userPhoto'/>
+                            src={u.photos.small != null ? u.photos.small : userPhoto} alt='userPhoto' />
                     </NavLink>
                 </div>
+
                 <div>
                     {u.followed ?
-                        <button 
+                        <button
                             disabled={props.isFollowingInProgress.some(id => id === u.id)}
                             onClick={() => {
                                 props.unfollow(u.id)
                             }}
                         >Unfollow</button> :
-                        <button 
+                        <button
                             disabled={props.isFollowingInProgress.some(id => id === u.id)}
                             onClick={() => {
                                 props.follow(u.id);
                             }}
                         >Follow</button>}
                 </div>
+
                 <div>{u.name}</div>
                 <div>{u.status}</div>
                 <div>{"u.location.country"}</div>
