@@ -8,6 +8,7 @@ import {
 import React from 'react';
 import Users from './Users';
 import Preloader from '../common/Preloader/Preloader';
+import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 
 class UsersContainer extends React.Component {
     componentDidMount() {
@@ -43,11 +44,11 @@ let mapStateToProps = (state) => {
         pageSize: state.usersPage.pageSize,
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
-        // isFetching: state.usersPage.isFetching,
         isFollowingInProgress: state.usersPage.isFollowingInProgress
     }
 }
 
-export default connect(
+
+export default withAuthRedirect(connect(
     mapStateToProps, { follow, unfollow, setCurrentPage, getUsers }
-)(UsersContainer);
+)(UsersContainer));
