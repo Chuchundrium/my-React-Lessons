@@ -1,9 +1,14 @@
 import React from 'react';
 import { reduxForm } from 'redux-form';
-import { Field } from 'redux-form';
+import { Field } from 'redux-form'; /* instead of just Input */
 
 const LoginForm = (props) => {
     return (
+        /**handleSubmit:
+         * e.preventDefault
+         * gets all form data and put them to object
+         * calls props.onSubmit(formData)
+         */
         <form onSubmit={props.handleSubmit}>
             <div>
                 <Field
@@ -25,7 +30,7 @@ const LoginForm = (props) => {
                     component={'input'}
                     type={'checkbox'}
                 />
-                <label> remember me</label>
+                <label> remember me </label>
             </div>
             <div>
                 <button>Login</button>
@@ -34,7 +39,11 @@ const LoginForm = (props) => {
     )
 }
 
+/* function reduxForm returns HOC
+** -> we will wrape form */
+
 const LoginReduxForm = reduxForm({
+    /* form's unique name: */
     form: 'loginForm'
 })(LoginForm);
 
@@ -49,6 +58,5 @@ const Login = (props) => {
         </div>
     )
 }
-
 
 export default Login;

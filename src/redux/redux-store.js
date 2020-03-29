@@ -13,6 +13,7 @@ let allReducers = combineReducers({
     sidebar: sidebarReducer,
     usersPage: usersReducer,
     auth: authReducer,
+    /* only 'form' can be used (out of the box): */
     form: formReducer
 });
 
