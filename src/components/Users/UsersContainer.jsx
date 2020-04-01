@@ -10,7 +10,7 @@ import Users from './Users';
 import Preloader from '../common/Preloader/Preloader';
 import { compose } from 'redux';
 import { 
-    usersSelector,
+    getUsersSuperSelector,
     getPageSize,
     getTotalUsersCount,
     getCurrentPage,
@@ -57,7 +57,7 @@ class UsersContainer extends React.Component {
 // }
 let mapStateToProps = (state) => {
     return {
-        users: usersSelector(state),
+        users: getUsersSuperSelector(state),
         pageSize: getPageSize(state),
         totalUsersCount: getTotalUsersCount(state),
         currentPage: getCurrentPage(state),
