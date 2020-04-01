@@ -1,4 +1,4 @@
-import { usersAPI } from '../api/api';
+import { usersAPI } from '../../api/api';
 
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
@@ -97,6 +97,7 @@ export const toggleIsFollowingInProgress = (isFollowingInProgress, userId) => ({
     userId
 });
 
+/** getUsers and currentPage are renamed to requestUsers and page in lesson 81 */
 export const getUsers = (currentPage, pageSize) => {
     return (dispatch) => {
         dispatch(toggleIsFetching(true));

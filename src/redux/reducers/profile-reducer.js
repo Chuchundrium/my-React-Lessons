@@ -1,4 +1,4 @@
-import { profileAPI } from '../api/api';
+import { profileAPI } from '../../api/api';
 const ADD_POST = 'ADD-POST';
 const SET_USER_PROFILE = 'SET-USER-PROFILE';
 const SET_USER_STATUS = 'SET-USER-STATUS';
@@ -66,7 +66,6 @@ export const updateStatus = (status) => (dispatch) => {
         if (response.data.resultCode === 0) {
             dispatch(setUserStatus(status));
         }
-        
     })
 }
 

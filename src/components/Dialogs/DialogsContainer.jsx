@@ -1,4 +1,4 @@
-import { sendMsgActionCreator } from '../../redux/messages-reducer';
+import { sendMsgActionCreator } from '../../redux/reducers/messages-reducer';
 import Dialogs from './Dialogs';
 import { connect } from 'react-redux';
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
