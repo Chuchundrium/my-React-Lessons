@@ -1,6 +1,8 @@
 import React from 'react';
 // import s from './ProfileInfo.module.css';
 
+/** Class component used here, 
+ * because local state and life cycle methods are need */
 class ProfileStatus extends React.Component {
     state = {
         editMode: false,
@@ -23,14 +25,13 @@ class ProfileStatus extends React.Component {
         })
     };
 
+    /** lifecycle method */
     componentDidUpdate(prevProps, prevState) {
         if (prevProps.status !== this.props.status) {
             this.setState({
                 status: this.props.status
             })
         }
-        // this.state;
-        // this.props;
     }
 
     render() {
