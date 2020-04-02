@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useEffect } from 'react';
 
 const ProfileStatusWithHooks = (props) => {
     /** state values by default: 
@@ -16,6 +17,11 @@ const ProfileStatusWithHooks = (props) => {
     let [editMode, setEditMode] = useState(false);
     /** recommends to use several local states if them are used / changed independently */
     let [status, setStatus] = useState(props.status);
+
+    /** for state / component syncronization */
+    useEffect(() => {
+        setStatus(props.status);
+    }, [props.status]);
 
     const editModeActivate = () => {
         setEditMode(true);
