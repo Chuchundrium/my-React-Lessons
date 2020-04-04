@@ -1,49 +1,33 @@
 import React from 'react';
 import { reduxForm } from 'redux-form';
 import { Field } from 'redux-form'; /* instead of just Input */
-import { Input } from './../common/FormsControls/formsControls'
+import { Input, createField } from './../common/FormsControls/formsControls'
 import { required } from './../../utils/validators'
 import { connect } from 'react-redux';
 import { login } from "./../../redux/reducers/auth-reducer"
 import { Redirect } from 'react-router-dom';
 import style from './../common/FormsControls/formsControls.module.css'
 
-const LoginForm = (props) => {
+/** (props) => { ... props.handleSubmit ... props.error ...}
+ *    ^^^ replaced by
+ * ({handleSubmit, error}) => { ... handleSubmit ... error ...}
+ * -> we can take only what we need from props (with structurization)
+ */
+const LoginForm = ({ handleSubmit, error }) => {
     return (
         /**handleSubmit:
          * e.preventDefault
          * gets all form data and put them to object
          * -> calls props.onSubmit(formData)
          */
-        <form onSubmit={props.handleSubmit}>
-            <div>
-                <Field
-                    name={'email'}
-                    component={Input}
-                    placeholder={'email'}
-                    validate={[required]}
-                />
-            </div>
-            <div>
-                <Field
-                    name='password'
-                    type='password'
-                    component={Input}
-                    placeholder={'password'}
-                    validate={[required]}
-                />
-            </div>
-            <div>
-                <Field
-                    name='rememberMe'
-                    component={Input}
-                    type={'checkbox'}
-                />
-                <label> remember me </label>
-            </div>
-            {props.error &&
+        <form onSubmit={handleSubmit}>
+            {createField('email', Input, 'email', [required])}
+            {createField('password', Input, 'password', [required], {type: 'password'})}
+            {createField('rememberMe', Input, null, [], {type: 'checkbox'}, 'remember me')}
+
+            {error &&
                 <div className={style.formSummaryError}>
-                    {props.error}
+                    {error}
                 </div>}
             <div>
                 <button>Login</button>
@@ -60,13 +44,12 @@ const LoginReduxForm = reduxForm({
     form: 'loginForm'
 })(LoginForm);
 
-const Login = (props) => {
+const Login = ({ login, isAuth }) => {
     const onSubmit = (formData) => {
-        props.login(formData.email, formData.password, formData.rememberMe);
+        login(formData.email, formData.password, formData.rememberMe);
 
     };
-    if (props.isAuth) {
-        console.log('props.isAuth: ', props.isAuth);
+    if (isAuth) {
         return <Redirect to="/profile" />
     };
     return (

@@ -1,6 +1,6 @@
 import { getAuthUserData } from './auth-reducer';
 
-const INITIALIZED = 'INITIALIZED';
+const INITIALIZED = 'network/app/INITIALIZED';
 
 let initialState = {
     ifInitialized: false
