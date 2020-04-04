@@ -1,6 +1,10 @@
 import React from 'react';
 import './App.css';
 
+import store from './redux/redux-store';
+import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+
 import { Route, withRouter } from 'react-router-dom';
 
 import Navbar from './components/Navbar/Navbar';
@@ -47,6 +51,23 @@ const mapStateToProps = (state) => ({
   ifInitialized: state.app.ifInitialized
 });
 
-export default compose(
-  withRouter, /** !!! Important */
+// export default compose(
+//   withRouter, /** !!! Important */
+//   connect(mapStateToProps, { appInitialization }))(App);
+
+/** for App.test.js : */
+const AppContainer = compose(
+  withRouter,
   connect(mapStateToProps, { appInitialization }))(App);
+
+const NetworkApp = (props) => {
+  return (
+    <BrowserRouter>
+      <Provider store={store}>
+        <AppContainer />
+      </Provider>
+    </BrowserRouter>
+  )
+}
+
+export default NetworkApp;
