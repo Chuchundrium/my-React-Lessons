@@ -2,6 +2,9 @@ import React from 'react';
 import './App.css';
 
 import store from './redux/redux-store';
+/** lesson 95:
+ * HashRouter can be used for GitHub deploy (github pages)
+ * (he does no see smth after #) */
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { Route, withRouter } from 'react-router-dom';
@@ -63,6 +66,10 @@ const AppContainer = compose(
   withRouter,
   connect(mapStateToProps, { appInitialization }))(App);
 
+  /** lesson 95:
+   * basename=[process.env.PUBLIC_URL]
+   * can be use for GitHub hosting
+   */
 const NetworkApp = (props) => {
   return (
     <BrowserRouter>
