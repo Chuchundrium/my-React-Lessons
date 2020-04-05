@@ -11,7 +11,7 @@ const TOGGLE_IS_FOLLOWING_IN_PROGRESS = 'network/users/TOGGLE-IS-FOLLOWING-IN-PR
 
 let initialState = {
     users: [],
-    pageSize: 5,
+    pageSize: 7,
     totalUsersCount: 0,
     currentPage: 1,
     isFetching: false,

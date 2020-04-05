@@ -4,13 +4,11 @@ import Pagination from '../common/Pagination/Pagination';
 import User from './User';
 
 const Users = ({ currentPage, totalUsersCount, pageSize, onPageChanged, ...props }) => {
-
-
     return (
         <div className={s.myText}>
             <Pagination
                 currentPage={currentPage}
-                totalUsersCount={totalUsersCount}
+                totalItemsCount={totalUsersCount}
                 pageSize={pageSize}
                 onPageChanged={onPageChanged}
             />
