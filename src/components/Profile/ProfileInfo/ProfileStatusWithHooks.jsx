@@ -34,11 +34,11 @@ const ProfileStatusWithHooks = (props) => {
     const onStatusChange = (e) => {
         setStatus(e.currentTarget.value);
     };
-    const componentDidUpdate = (prevProps, prevState) => {
-        if (prevProps.status !== props.status) {
-            setStatus(props.status);
-        }
-    }
+    // const componentDidUpdate = (prevProps, prevState) => {
+    //     if (prevProps.status !== props.status) {
+    //         setStatus(props.status);
+    //     }
+    // }
 
     return (
         <div>

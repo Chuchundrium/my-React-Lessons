@@ -6,3 +6,10 @@
     width: 200px;
     height: 200px;
 }
+.contact {
+    padding-left: 20px;
+}
+.formSummaryError {
+    padding: 5px;
+    color: #f05945;
+}

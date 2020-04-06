@@ -2,7 +2,7 @@ import React from 'react';
 import Profile from './Profile';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { getUserProfile, getUserStatus, updateStatus, savePhoto } from '../../redux/reducers/profile-reducer';
+import { getUserProfile, getUserStatus, updateStatus, savePhoto, saveProfile } from '../../redux/reducers/profile-reducer';
 import { compose } from 'redux';
 
 class ProfileContainer extends React.Component {
@@ -21,10 +21,10 @@ class ProfileContainer extends React.Component {
         this.profileUpdate();
     }
     /** by default is called with every props update
-     * it may lead to looping
+     * so, it may lead to looping
      */
     componentDidUpdate(prevProps, prevState) {
-        if (this.props.match.params.userId != prevProps.match.params.userId) {
+        if (this.props.match.params.userId !== prevProps.match.params.userId) {
             this.profileUpdate();
         }
     }
@@ -38,6 +38,7 @@ class ProfileContainer extends React.Component {
                     status={this.props.status}
                     updateStatus={this.props.updateStatus}
                     savePhoto={this.props.savePhoto}
+                    saveProfile={this.props.saveProfile}
                 />
             </div>
         )
@@ -53,7 +54,7 @@ let mapStateToProps = (state) => ({
 
 
 export default compose(
-    connect(mapStateToProps, { getUserProfile, getUserStatus, updateStatus, savePhoto }),
+    connect(mapStateToProps, { getUserProfile, getUserStatus, updateStatus, savePhoto, saveProfile }),
     withRouter
 )(ProfileContainer);
 
