@@ -12,7 +12,7 @@ import style from './../common/FormsControls/formsControls.module.css'
  * ({handleSubmit, error}) => { ... handleSubmit ... error ...}
  * -> we can take only what we need from props (with structurization)
  */
-const LoginForm = ({ handleSubmit, error }) => {
+const LoginForm = ({ handleSubmit, error, captchaUrl }) => {
     return (
         /**handleSubmit:
          * e.preventDefault
@@ -23,7 +23,13 @@ const LoginForm = ({ handleSubmit, error }) => {
             {createField('email', Input, 'email', [required])}
             {createField('password', Input, 'password', [required], {type: 'password'})}
             {createField('rememberMe', Input, null, [], {type: 'checkbox'}, 'remember me')}
+            {captchaUrl && 
+                <div>
+                    <img src={captchaUrl} alt='captha' />
+                    {createField('captcha', Input, '', [required])}
+                </div>
 
+                }
             {error &&
                 <div className={style.formSummaryError}>
                     {error}
@@ -43,9 +49,9 @@ const LoginReduxForm = reduxForm({
     form: 'loginForm'
 })(LoginForm);
 
-const Login = ({ login, isAuth }) => {
+const Login = ({ login, isAuth, captchaUrl }) => {
     const onSubmit = (formData) => {
-        login(formData.email, formData.password, formData.rememberMe);
+        login(formData.email, formData.password, formData.rememberMe, formData.captcha);
 
     };
     if (isAuth) {
@@ -54,12 +60,13 @@ const Login = ({ login, isAuth }) => {
     return (
         <div>
             <h1>Login</h1>
-            <LoginReduxForm onSubmit={onSubmit} />
+            <LoginReduxForm onSubmit={onSubmit} captchaUrl={captchaUrl} />
         </div>
     );
 };
 
 const mapStateToProps = (state) => ({
+    captchaUrl: state.auth.captchaUrl,
     isAuth: state.auth.isAuth
 });
 // export default Login;
