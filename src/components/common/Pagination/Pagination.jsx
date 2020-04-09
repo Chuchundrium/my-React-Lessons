@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import s from './Pagination.module.css';
+import cn from 'classnames';
 
 let Pagination = ({
     currentPage,
@@ -18,7 +19,7 @@ let Pagination = ({
     const rightPortionPageNum = (portionNum) * portionSize;
 
     return (
-        <div>
+        <div className={cn(s.paginator)}>
             {portionNum > 1 &&
                 <button onClick={() => { setPortionNum(portionNum - 1) }}>
                     PREV</button>}
@@ -28,7 +29,8 @@ let Pagination = ({
                 return (
                     <span key={p}
                         id={s.pageNumber}
-                        className={(p === currentPage) ? s.selectedPage : undefined}
+                        className={cn(s.myColor, {[s.selectedPage]: p===currentPage})}
+                        // className={(p === currentPage) ? s.selectedPage : undefined}
                         onClick={(e) => { onPageChanged(p) }}
                     >{p}</span>
                 )

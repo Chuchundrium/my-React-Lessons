@@ -5,7 +5,7 @@ const ADD_POST = 'network/profile/ADD-POST';
 const DELETE_POST = 'network/profile/DELETE-POST';
 const SET_USER_PROFILE = 'network/profile/SET-USER-PROFILE';
 const SET_USER_STATUS = 'network/profile/SET-USER-STATUS';
-const SAVE_PHOTO_SUCCESS='network/profile/SAVE-PHOTO-SUCCESS';
+const SAVE_PHOTO_SUCCESS = 'network/profile/SAVE-PHOTO-SUCCESS';
 
 let initialState = {
     posts: [
@@ -43,7 +43,7 @@ const profileReducer = (state = initialState, action) => {
         case SAVE_PHOTO_SUCCESS:
             return {
                 ...state,
-                profile: {...state.profile, photos: action.photos}
+                profile: { ...state.profile, photos: action.photos }
             };
         default:
             return state;
@@ -80,10 +80,17 @@ export const getUserStatus = (userId) => async (dispatch) => {
 
 };
 export const updateStatus = (status) => async (dispatch) => {
-    const response = await profileAPI.updateStatus(status);
-    if (response.data.resultCode === 0) {
-        dispatch(setUserStatus(status));
-    };
+    try {
+        const response = await profileAPI.updateStatus(status);
+        if (response.data.resultCode === 0) {
+            dispatch(setUserStatus(status));
+        };
+    }
+    catch(error) {
+        /** error can be dispatched here
+         * or smth else
+         */
+    }
 };
 export const savePhoto = (file) => async (dispatch) => {
     const response = await profileAPI.savePhoto(file);
@@ -105,8 +112,8 @@ export const saveProfile = (profile) => async (dispatch, getState) => {
          */
         // dispatch(stopSubmit('profileEditForm', {"contacts": {"facebook": response.data.messages[0]}}));
         /** 97. One text for all errors: */
-        dispatch(stopSubmit('profileEditForm', {_error: response.data.messages[0]}));
-        return Promise.reject(response.data.messages[0]);        
+        dispatch(stopSubmit('profileEditForm', { _error: response.data.messages[0] }));
+        return Promise.reject(response.data.messages[0]);
     }
 }
 

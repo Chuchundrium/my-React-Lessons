@@ -1,11 +1,15 @@
 .selectedPage {
     font-weight: bold;
 }
-
 #pageNumber {
-    margin-right: 1ex;
-    
+    margin-right: 1ex;   
 }
 #pageNumber:hover {
     cursor: pointer; 
+}
+.paginator {
+    margin: 5px
+}
+.myColor {
+    color: #f05945;
 }

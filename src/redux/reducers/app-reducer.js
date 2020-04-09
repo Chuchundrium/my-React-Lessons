@@ -2,8 +2,11 @@ import { getAuthUserData } from './auth-reducer';
 
 const INITIALIZED = 'network/app/INITIALIZED';
 
+/** 99. 
+ * globalError could be dispatched for show if some error occured */
 let initialState = {
-    ifInitialized: false
+    ifInitialized: false,
+    globalError: null
 };
 
 const appReducer = (state = initialState, action) => {
